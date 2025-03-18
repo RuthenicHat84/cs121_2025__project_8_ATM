@@ -2,12 +2,11 @@
 
 public class CheckingAccount implements HasMenu {
 
-
     CheckingAccount(){
-        double balance = 0;
+        this.balance = 0;
     }
     CheckingAccount(double balance){
-        double balance = balance;
+        this.balance = balance;
     }
 
     public static void main(String[] args){
@@ -16,37 +15,44 @@ public class CheckingAccount implements HasMenu {
     }
 
     String[] menu(){
-        
+        HasMenu.menu();
     }
 
     void start(){
-
+        HasMenu.start();
     }
 
     double getBalance(){
-        return balance;
+        return this.balance;
     }
 
     String[] getBalString(){
-        return Str(balance);
+        return Str(this.balance);
     }
 
     void setBalance(double balance){
-        double balance = balance; 
+        this.balance = balance; 
     }
 
     void checkBalance(){
-        return balance;
+        return this.getBalString();
     }
 
     private double getDouble(){
-        // fill later
+        Scanner input = new Scanner(System.in);
+        String sResult = input.nextLine();
+        double result = 0d;
+        try{
+            double.parseDouble(sResult);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     void makeDeposit(){
-        menu();
         try{
-            balance += userIn;
+            this.balance += userIn;
         }
         catch(NumberFormatException e){
             System.out.println(e.getMessage());
@@ -55,9 +61,8 @@ public class CheckingAccount implements HasMenu {
     }
 
     void makeWithdrawl(){
-        menu();
         try{
-            balance -= userIn;
+            this.balance -= userIn;
         }
         catch(NumberFormatException e){
             System.out.println(e.getMessage());
