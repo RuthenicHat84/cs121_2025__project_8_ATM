@@ -15,11 +15,22 @@ public class CheckingAccount implements HasMenu {
     }
 
     String[] menu(){
-        HasMenu.menu();
+        System.out.println("Checking Account\n\
+        0) quit\n\
+        1) checking balance\n\
+        2) make a deposit\n\
+        3) make a withdrawl")
+
+        Scanner input = new Scanner(System.in);
+        String selection = input.nextLine();
+
+        if(selection = "0"){
+            
+        }
     }
 
     void start(){
-        HasMenu.start();
+
     }
 
     double getBalance(){
@@ -27,46 +38,47 @@ public class CheckingAccount implements HasMenu {
     }
 
     String[] getBalString(){
-        return Str(this.balance);
+        String result = String.format("$%.02f", this.balance);
+        return result;
     }
 
     void setBalance(double balance){
-        this.balance = balance; 
+        this.balance = balance;
     }
 
     void checkBalance(){
         return this.getBalString();
     }
 
-    private double getDouble(){
+    private double getDouble()){
         Scanner input = new Scanner(System.in);
+        System.out.print("Please insert amount to deposit/withdrawl: ");
         String sResult = input.nextLine();
         double result = 0d;
         try{
-            double.parseDouble(sResult);
+            result.parseDouble(sResult);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        return result;
     }
 
     void makeDeposit(){
-        try{
-            this.balance += userIn;
-        }
-        catch(NumberFormatException e){
-            System.out.println(e.getMessage());
-        }
-
+        double deposit = getDouble();
+        this.balance += deposit;
+        System.out.println("\nNew Balance: " + getBalString());
     }
 
     void makeWithdrawl(){
-        try{
-            this.balance -= userIn;
-        }
-        catch(NumberFormatException e){
-            System.out.println(e.getMessage());
+            double withdrawl = getDouble();
+            if(this.balance - withdrawl < 0){
+                System.out.println("Try not to have a negative balance. not a good practice.");
+            }
+            else{
+                this.balance -= withdrawl;
+                System.out.println("\nNew Balance: " + getBalString());
+            }
 
-        }
     }
 }
